@@ -1,0 +1,37 @@
+# Render blueprint — deploys the whole product (website + API) as one service.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After deploy: set the AI_API_KEY secret in the Render dashboard (the Groq
+# key). AUTH_SECRET is generated and persisted in /data on first boot; you can
+# pre-set it to keep tokens stable across redeploys.
+#
+# Note on Google Classroom: to use it from the deployed domain you need a
+# Google OAuth **Web application** client with that domain added as an
+# authorized origin and its `/oauth/callback` as a redirect URI, then set
+# VITE_GOOGLE_REDIRECT_URI at build time. The current Desktop client works
+# only on loopback (local dev).
+
+services:
+  - type: web
+    name: studyflow
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /data
+      # Set these in the Render dashboard (never in this file):
+      - key: AI_API_KEY
+        sync: false
+      - key: AUTH_SECRET
+        sync: false
+      # Optional: point the web app's Google OAuth at a Web client's redirect
+      # - key: VITE_GOOGLE_REDIRECT_URI
+      #   value: https://your-app.onrender.com/oauth/callback
+    disk:
+      name: studyflow-data
+      mountPath: /data
+      sizeGB: 1

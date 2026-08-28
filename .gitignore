@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+*.sqlite
+*.db
+src-tauri/target
+src-tauri/gen
+website/.env.local
+.tooling
+backend/data
+.freebuff
+*.log
+.DS_Store
+Thumbs.db

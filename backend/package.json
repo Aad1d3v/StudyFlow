@@ -1,0 +1,14 @@
+{
+  "name": "studyflow-backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "StudyFlow backend: accounts, per-user data sync, and the AI proxy. Zero runtime dependencies — Node's built-in http, sqlite, and crypto.",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/index.ts",
+    "start": "node --env-file-if-exists=.env src/index.ts"
+  },
+  "engines": {
+    "node": ">=23.6"
+  }
+}
